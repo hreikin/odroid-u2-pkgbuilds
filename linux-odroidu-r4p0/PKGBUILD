@@ -15,8 +15,8 @@ url="http://github.com/hardkernel/linux/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'git' 'inetutils' 'bc')
 options=('!strip')
-_commit=4c8cb0975bae3770cad4909e3770e94db4d41392
-source=('git+https://github.com/hardkernel/linux.git#branch=odroid-3.8.y-mali_r4p0'
+_commit=036308d690e8830274e495bac1c03fa056036438
+source=('git+https://github.com/hardkernel/linux.git#branch=odroid-3.8.y'
 	'config_u2')
 md5sums=('SKIP'
          'SKIP')
