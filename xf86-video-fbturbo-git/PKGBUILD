@@ -3,14 +3,14 @@
 pkgname=xf86-video-fbturbo
 _gitname=xf86-video-fbturbo
 pkgver=195.4c7313c
-pkgrel=1
+pkgrel=2
 pkgdesc="X.org mali video driver"
 arch=('armv7h')
 url="https://github.com/ssvb/xf86-video-fbturbo"
 license=('MIT')
 depends=('mali-odroid')
-makedepends=('git' 'xorg-server-devel')
-conflicts=('xorg-server<1.14.0' 'X-ABI-VIDEODRV_VERSION<14' 'X-ABI-VIDEODRV_VERSION>=19')
+makedepends=('git' 'xorg-server-devel' 'X-ABI-VIDEODRV_VERSION=18')
+conflicts=('xorg-server<1.16.0' 'X-ABI-VIDEODRV_VERSION<18' 'X-ABI-VIDEODRV_VERSION>=19')
 options=('!libtool')
 groups=('xorg-drivers' 'xorg')
 provides=('xf86-video-sunxifb')
@@ -36,6 +36,8 @@ build() {
 
 package() {
   cd "${srcdir}/${_gitname}"
+  mkdir -p "${pkgdir}/etc/X11/xorg.conf.d/"
+  cp "xorg.conf" "${pkgdir}/etc/X11/xorg.conf.d/99-fbturbo.conf"
   make DESTDIR="${pkgdir}/" install
   install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
   install -m644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/"

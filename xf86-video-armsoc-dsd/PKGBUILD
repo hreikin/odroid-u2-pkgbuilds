@@ -10,7 +10,7 @@ buildarch=4
 
 pkgname=xf86-video-armsoc-dsd
 pkgdesc="armsoc framebuffer driver for X from chromium os git with exynos drm mods"
-pkgver=210.3516aa3
+pkgver=235.653d856
 pkgrel=1
 epoch=1
 arch=('armv7h')
