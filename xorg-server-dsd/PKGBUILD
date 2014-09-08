@@ -5,7 +5,7 @@
 pkgbase=xorg-server
 pkgname=('xorg-server-dsd' 'xorg-server-xephyr' 'xorg-server-xdmx' 'xorg-server-xvfb' 'xorg-server-xnest' 'xorg-server-common' 'xorg-server-devel')
 pkgver=1.16.0
-pkgrel=5.1 # build first with 0.1 and then rebuild it after xf86-input-evdev rebuild
+pkgrel=6 # build first with 0.1 and then rebuild it after xf86-input-evdev rebuild
 arch=('i686' 'x86_64' 'armv7h')
 license=('custom')
 url="http://xorg.freedesktop.org"
@@ -13,11 +13,13 @@ makedepends=('pixman' 'libx11' 'mesa' 'mesa-libgl' 'xf86driproto' 'xcmiscproto' 
              'inputproto' 'fontsproto' 'videoproto' 'presentproto' 'compositeproto' 'recordproto' 'scrnsaverproto'
              'resourceproto' 'xineramaproto' 'libxkbfile' 'libxfont' 'renderproto' 'libpciaccess' 'libxv'
              'xf86dgaproto' 'libxmu' 'libxrender' 'libxi' 'dmxproto' 'libxaw' 'libdmx' 'libxtst' 'libxres'
-             'xorg-xkbcomp' 'xorg-util-macros' 'xorg-font-util' 'glproto' 'dri2proto' 'libgcrypt'
+             'xorg-xkbcomp' 'xorg-util-macros' 'xorg-font-util' 'glproto' 'dri2proto' 'libgcrypt' 'libepoxy'
              'xcb-util' 'xcb-util-image' 'xcb-util-wm' 'xcb-util-keysyms' 'dri3proto' 'libxshmfence') 
 source=(${url}/releases/individual/xserver/${pkgbase}-${pkgver}.tar.bz2
         autoconfig-nvidia.patch
         autoconfig-sis.patch
+        glamor-upstream-fix.patch
+        nvidia-drm-outputclass.conf
         xvfb-run
         xvfb-run.1
         10-quirks.conf
