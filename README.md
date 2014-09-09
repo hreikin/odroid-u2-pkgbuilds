@@ -1,40 +1,49 @@
 Odroid U2/3 - Arch Linux - Mali/xorg-armsoc
 ===========================================
+This is  fork of gripped's repo odroid-u2-pkgbuilds, i made this to try and update the PKGBUILD's and keep them moving with Arch, the orignal README will be left in the repo for reference, I will only be working on the libs/drivers/etc i need/use but will leave the rest there incase anyone wants to update them !
 
-If you want to try the latest Mali blob with dsd's xf86-video-armsoc as dicussed here :
-
-http://forum.odroid.com/viewtopic.php?f=77&t=4456#p35809
-
-I've built packages which do this.
-
-**PKGBUILD's :** https://github.com/gripped/odroid-u2-pkgbuilds
-
-**Packages :** http://odroidxu.leeharris.me.uk/u2/
-
-To do this you can add a custom repo (as root) :
+Install/Build Instructions
+==========================
+There are 2 ways to install/build these packages, either install the provided 'pkg.tar.xz' file with pacman (Method 1) or build the package with the 'PKGBUILD' and then install the resulting 'pkg.tar.xz' file with pacman (Method 2). The packages i recommend you install are :
 
 ```
-cat >> /etc/pacman.conf <<EOF
-[odroidu]
-SigLevel = Never
-Server = http://odroidxu.leeharris.me.uk/u2
-EOF
+linux-odroidu-r4p0
+mali-odroid-r4p0
+mesa-libgl-noegl
+mesa-noegl
+xf86-video-armsoc-dsd
+xf86-video-fbturbo-git
+xorg-server-dsd
 ```
 
-
-And then update pacman :
-
-```
-pacman -Syu
-```
-
-And then install them with pacman :
+Method 1
+--------
+Change directory to where you want to clone the repo :
 
 ```
-pacman -S linux-odroidu-r4p0 mali-odroid-r4p0 xf86-video-armsoc-dsd xorg-server-dsd
+$ cd git
 ```
 
-And you'll need to edit /etc/xorg.conf. Mine now has
+Then clone the repo :
+
+```
+$ git clone https://github.com/hreikin/odroid-u2-pkgbuilds
+```
+
+Then change directory into the file you wish to install, for example mesa-noegl :
+
+```
+$ cd mesa-noegl
+```
+
+Then install the available 'pkg.tar.xz' files with pacman :
+
+```
+$ sudo pacman -U mesa-noegl-10.2.7-1-armv7h.pkg.tar.xz
+$ sudo pacman -U mesa-libgl-noegl-10.2.7-1-armv7h.pkg.tar.xz
+```
+
+Once you have all the files installed you need to edit your '/etc/xorg.conf' mine has :
 
 ```
 # X.Org X server configuration file for xfree86-video-mali
@@ -72,4 +81,73 @@ Section "DRI"
 EndSection
 ```
 
-I'm not sure if I'm going to maintain/update these packages, etc as I don't know if I am going to keep using the armsoc driver myself. But the PKGBUILD's are there so you can fork the repo and DIY.
+Method 2
+--------
+Change directory to where you want to clone the repo :
+
+```
+$ cd git
+```
+
+Then clone the repo :
+
+```
+$ git clone https://github.com/hreikin/odroid-u2-pkgbuilds
+```
+
+Then change directory into the file you wish to install, for example mesa-noegl :
+
+```
+$ cd mesa-noegl
+```
+
+Then take a look at the 'PKGBUILD' to check everything is ok with nano before running 'makepkg -s' :
+
+```
+$ nano PKGBUILD
+$ makepkg -s
+```
+
+Once 'makepkg' finishes it will create a 'pkg.tar.xz' file (maybe more than 1!) which can be installed with pacman like so :
+
+```
+$ sudo pacman -U mesa-noegl-10.2.7-1-armv7h.pkg.tar.xz
+$ sudo pacman -U mesa-libgl-noegl-10.2.7-1-armv7h.pkg.tar.xz
+```
+Once you have all the files installed you need to edit your '/etc/xorg.conf' mine has :
+
+```
+# X.Org X server configuration file for xfree86-video-mali
+
+Section "Device"
+
+  Identifier "Mali-Fbdev"
+
+  Driver   "armsoc"
+
+  Option   "fbdev"           "/dev/fb1"
+
+  Option  "DriverName"      "exynos"
+
+EndSection
+
+
+
+Section "Screen"
+
+  Identifier   "Mali-Screen"
+
+  Device       "Mali-Fbdev"
+
+  DefaultDepth 24 
+
+EndSection
+
+
+
+Section "DRI"
+
+  Mode 0666
+
+EndSection
+```
