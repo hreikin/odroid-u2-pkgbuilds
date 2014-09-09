@@ -10,18 +10,18 @@ buildarch=4
 
 pkgname=xf86-video-armsoc-dsd
 pkgdesc="armsoc framebuffer driver for X from chromium os git with exynos drm mods"
-pkgver=235.653d856
+pkgver=215.a147ccc
 pkgrel=1
 epoch=1
 arch=('armv7h')
-url="https://github.com/dsd/xf86-video-armsoc.git"
+url="https://github.com/hreikin/xf86-video-armsoc.git"
 license=('GPL2')
 makedepends=('git' 'pkgconfig' 'xorg-server-devel' 'resourceproto' 'scrnsaverproto')
 options=('!libtool')
-conflicts=('xf86-video-armsoc-odroid' 'xf86-video-armsoc-git')
-replaces=('xf86-video-armsoc-odroid' 'xf86-video-armsoc-git')
-provides=('xf86-video-armsoc-odroid' 'xf86-video-armsoc-git')
-source=("$pkgname::git+https://github.com/dsd/xf86-video-armsoc.git#branch=r4p0")
+conflicts=('xf86-video-armsoc' 'xf86-video-armsoc-git')
+replaces=('xf86-video-armsoc' 'xf86-video-armsoc-git')
+provides=('xf86-video-armsoc' 'xf86-video-armsoc-git')
+source=("$pkgname::git+https://github.com/hreikin/xf86-video-armsoc.git#branch=r4p0")
 md5sums=('SKIP')
 
 pkgver() {
