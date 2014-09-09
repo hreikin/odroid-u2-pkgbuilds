@@ -32,6 +32,7 @@ build() {
     --sysconfdir=/etc \
     --with-dri-driverdir=/usr/lib/xorg/modules/dri \
     --with-gallium-drivers=swrast \
+    --with-gallium-drivers=svga \
     --with-dri-drivers=swrast \
     --with-llvm-shared-libs \
     --enable-gallium-llvm \
