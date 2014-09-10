@@ -61,8 +61,8 @@ package_mesa-noegl() {
   pkgdesc="an open-source implementation of the OpenGL specification without egl, gles1, gles2"
   depends=('libdrm' 'libvdpau' 'wayland' 'libxxf86vm' 'libxdamage' 'systemd' 'elfutils' 'llvm-libs')
   optdepends=('opengl-man-pages: for the OpenGL API man pages')
-  provides=("mesa=${pkgver}" 'libglapi' 'osmesa' 'libgbm' 'libgles' 'libegl' 'khrplatform-devel')
-  conflicts=('mesa' 'libglapi' 'osmesa' 'libgbm')
+  provides=("mesa=${pkgver}" 'odroid-libgl' 'libglapi' 'osmesa' 'libgbm' 'libgles' 'libegl' 'khrplatform-devel')
+  conflicts=('mesa' 'odroid-libgl' 'libglapi' 'osmesa' 'libgbm')
   replaces=('libglapi' 'osmesa' 'libgbm' 'libgles' 'libegl' 'khrplatform-devel')
 
   mv -v ${srcdir}/fakeinstall/* ${pkgdir}
